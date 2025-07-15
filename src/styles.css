@@ -19,7 +19,7 @@ body {
   gap: 20px;
 }
   
-#lists-container {
+#list-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -54,7 +54,7 @@ main {
   gap: 20px;
 }
   
-#todos-container {
+#todo-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -67,7 +67,7 @@ main {
   border-left: 5px solid steelblue;
 }
   
-#add\ todo {
+#add-todo {
   width: 100px;
   padding: 8px;
   border: none;
