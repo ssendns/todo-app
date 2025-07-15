@@ -1,6 +1,6 @@
 import List from './list.js';
 
-export default class ListManager {
+export default class Manager {
     constructor() {
         this.lists = [];
     }
