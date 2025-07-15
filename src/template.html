@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>todo manager</title>
+    <meta charset="UTF-8" />
+    <title>to do manager</title>
 </head>
 <body>
-    <header><h1>my lists</h1></header>
+    <div id="sibebar">
+        <h2>my lists</h2>
+        <div id="lists-container">
+            <div id="list">list1</div>
+            <div id="list">list2</div>
+        </div>
+        <button id="add-list">add list</button>
+    </div>
     <main>
-      <div id="lists-container"></div>
-      <div id="todos-container"></div>
-      <button id="add-list">add list</button>
-      <button id="add todo">add todo</button>
+        <h2>current list</h2>
+        <div id="todos-container">
+            <div id="todo">todo1</div>
+            <div id="todo">todo2</div>
+        </div>
+        <button id="add todo">add todo</button>
     </main>
   </body>
 </html>
