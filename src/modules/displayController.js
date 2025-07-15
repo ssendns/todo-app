@@ -9,7 +9,7 @@ const displayController = (function () {
     const addListBtn = document.querySelector('#add-list');
     addListBtn.addEventListener("click", () => {
         listContainer.innerHTML = "";
-        const title = "list";
+        const title = prompt("title:");
         manager.addList(title);
         displayController.renderLists();
     });
@@ -17,8 +17,8 @@ const displayController = (function () {
     const addTodoBtn = document.querySelector('#add-todo');
     addTodoBtn.addEventListener("click", () => {
         todoContainer.innerHTML = "";
-        const title = "todo";
-        const description = "test";
+        const title = prompt("title:");
+        const description = prompt("description:");
         manager.addTodo(manager.currentList, title, description);
         displayController.renderTodos();
     });
@@ -30,14 +30,19 @@ const displayController = (function () {
             const list = lists[i];
     
             const card = document.createElement("div");
-            card.classList.add("card");
-            card.id = "list";
+            card.classList.add("list");
+            if (list.id === manager.currentList) {
+                card.id = "selected";
+            } else {
+                card.id = "not-selected";
+            }
 
             card.innerHTML = `<p>${list.title}</p>`;
 
             card.addEventListener("click", () => {
                 manager.currentList = list.id;
                 renderTodos();
+                renderLists();
             });
 
             listContainer.appendChild(card);
@@ -53,10 +58,22 @@ const displayController = (function () {
             const todo = todos[i];
     
             const card = document.createElement("div");
-            card.classList.add("card");
-            card.id = "todo";
+            card.classList.add("todo");
+            if (todo.status) {
+                card.id = "done";
+            } else {
+                card.id = "not-done";
+            }
 
-            card.innerHTML = `<p>${todo.title}</p>`;
+            card.innerHTML = `
+                <input type="checkbox" ${todo.status ? "checked" : ""} />
+                <label>${todo.title}</label>
+            `;
+            const checkbox = card.querySelector("input[type='checkbox']");
+            checkbox.addEventListener("change", () => {
+                manager.changeTodoStatus(manager.currentList, todo.id);
+                renderTodos();
+            });
             todoContainer.appendChild(card);
         }
     }
