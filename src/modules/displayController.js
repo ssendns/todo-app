@@ -34,6 +34,12 @@ const displayController = (function () {
             card.id = "list";
 
             card.innerHTML = `<p>${list.title}</p>`;
+
+            card.addEventListener("click", () => {
+                manager.currentList = list.id;
+                renderTodos();
+            });
+
             listContainer.appendChild(card);
         }
     }
