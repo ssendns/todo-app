@@ -68,12 +68,21 @@ const displayController = (function () {
             card.innerHTML = `
                 <input type="checkbox" ${todo.status ? "checked" : ""} />
                 <label>${todo.title}</label>
+                <button id="remove">remove todo</button>
             `;
+
             const checkbox = card.querySelector("input[type='checkbox']");
             checkbox.addEventListener("change", () => {
                 manager.changeTodoStatus(manager.currentList, todo.id);
                 renderTodos();
             });
+
+            const removeBtn = card.querySelector("#remove");
+            removeBtn.addEventListener("click", () => {
+                manager.removeTodo(manager.currentList, todo.id);
+                renderTodos();
+            });
+
             todoContainer.appendChild(card);
         }
     }
