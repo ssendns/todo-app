@@ -25,5 +25,9 @@ export default class List {
     getTodos() {
         return this.todos;
     }
+
+    removeTodo(id) {
+        this.todos = this.todos.filter(todo => todo.id != id);
+    }
     
 }
