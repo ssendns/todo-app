@@ -30,7 +30,7 @@ export default class Manager {
     }
 
     getCurrentList() {
-        return this.getList(currentList);
+        return this.getList(this.currentList);
     }
 
     getTodos(id) {
