@@ -5,4 +5,7 @@ export default class Todo {
         this.description = description;
         this.status = false;
     }
+    changeStatus() {
+        this.status = !this.status;
+    }
 }
