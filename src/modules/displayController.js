@@ -1,15 +1,27 @@
 import Manager from './manager.js';
 
 const displayController = (function () {
-    const listContainer = document.querySelector('#lists-container');
-    const todoContainer = document.querySelector('#todos-container');
-
-    const addListBtn = document.querySelector('#add-list');
-    const addTodoBtn = document.querySelector('#add-todo');
-
+    const manager = new Manager();
+    const listContainer = document.querySelector('#list-container');
+    const todoContainer = document.querySelector('#todo-container');
     const currentListHeader = document.querySelector('#cur');
 
-    const manager = new Manager();
+    const addListBtn = document.querySelector('#add-list');
+    addListBtn.addEventListener("click", () => {
+        listContainer.innerHTML = "";
+        const title = "list";
+        manager.addList(title);
+        displayController.renderLists();
+    });
+
+    const addTodoBtn = document.querySelector('#add-todo');
+    addTodoBtn.addEventListener("click", () => {
+        todoContainer.innerHTML = "";
+        const title = "todo";
+        const description = "test";
+        manager.addTodo(manager.currentList, title, description);
+        displayController.renderTodos();
+    });
 
     function renderLists() {
         listContainer.innerHTML = "";
@@ -43,7 +55,7 @@ const displayController = (function () {
         }
     }
   
-    return { renderLists, renderTodos };
+    return { renderLists, renderTodos, manager };
 })();
   
 export default displayController;
