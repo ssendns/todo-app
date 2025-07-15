@@ -9,8 +9,8 @@
   --bg-list: #fce2ae;
   --bg-list-selected: #fdd78c;
 
-  --accent: #ff715b;
-  --accent-hover: #ff8a70;
+  --accent: #ff8a70;
+  --accent-hover: #ff715b;
 
   --accent2: #b0ec6b;
 
@@ -91,6 +91,10 @@ main {
 }
 
 .todo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   background-color: var(--bg-todo);
   border: 1px solid var(--border-light);
   color: var(--text-main);
@@ -124,4 +128,19 @@ main {
   
 #add-todo:hover {
     background-color: var(--accent-hover);;
+}
+
+#remove {
+  background-color: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-left: auto;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+#remove:hover {
+  background-color: var(--accent);
+  color: white;
 }
