@@ -4,6 +4,13 @@ export default class Manager {
     constructor() {
         this.lists = [];
         this.currentList = null;
+        this.init();
+    }
+
+    init() {
+        this.addList("inbox");
+        const list = this.lists[0];
+        this.currentList = list.id;
     }
 
     addList(title) {
@@ -35,6 +42,11 @@ export default class Manager {
 
     getTodos(id) {
         return this.getList(id).getTodos();
+    }
+
+    addTodo(id, title, description) {
+        const list = this.getList(id);
+        list.addTodo(title, description);
     }
 
     removeTodo(listId, todoId) {
