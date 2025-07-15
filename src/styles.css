@@ -1,0 +1,84 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+  
+body {
+  display: flex;
+  height: 100vh;
+}
+  
+#sibebar {
+  width: 250px;
+  background-color: lightgray;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+  
+#lists-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+  
+#list {
+  background-color: darkgrey;
+  padding: 10px;
+  border-radius: 4px;
+}
+  
+#add-list {
+  margin-top: auto;
+  padding: 8px;
+  width: 100px;
+  border: none;
+  border-radius: 4px;
+  background-color: grey;
+  align-self: center;
+  font-weight: bold;
+}
+  
+#add-list:hover {
+  background-color: rgb(78, 78, 78);
+}
+  
+main {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+  
+#todos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+  
+#todo {
+  background-color: lightsalmon;
+  padding: 10px;
+  border-radius: 4px;
+  border-left: 5px solid steelblue;
+}
+  
+#add\ todo {
+  width: 100px;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: steelblue;
+  color: white;
+  font-weight: bold;
+  margin-top: auto;
+  align-self: center;
+}
+  
+#add\ todo:hover {
+    background-color: rgb(52, 96, 132);
+}
