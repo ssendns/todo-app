@@ -1,6 +1,9 @@
 :root {
-  --bg-main: #fffefc;
+  --bg-main: #ffffff;
   --bg-sidebar: #fcf8e8;
+
+  --bg-card1: #ffe5ec;
+  --bg-card2: #e5f6fd;
 
   --bg-todo: #fff2d7;
   --bg-todo-done: #e1e1e1;
@@ -9,12 +12,20 @@
   --bg-list: #fce2ae;
   --bg-list-selected: #fdd78c;
 
+  --accent-pink: #f8485e;
+  --accent-orange: #ff914d;
+  --accent-yellow: #ffda3e;
+  --accent-mint: #96e6b3;
+  --accent-blue: #4fd3c4;
+  --accent-purple: #a963ff;
+
   --accent: #ff8a70;
   --accent-hover: #ff715b;
 
   --accent2: #b0ec6b;
 
-  --text-main: #2e2e2e;
+  --text-main: #1e1e1e;
+  --text-secondary: #555555;
   --text-muted: #9e9e9e;
 
   --border-light: #e0e0e0;
@@ -26,14 +37,18 @@
   padding: 0;
   font-family: system-ui, sans-serif;
 }
-  
+
+.hidden {
+  display: none;
+}
+
 body {
   display: flex;
   height: 100vh;
   background-color: var(--bg-main);
   color: var(--text-main);
 }
-  
+
 #sibebar {
   width: 250px;
   background-color: var(--bg-sidebar);
@@ -42,7 +57,7 @@ body {
   flex-direction: column;
   gap: 20px;
 }
-  
+
 #list-container {
   display: flex;
   flex-direction: column;
@@ -52,15 +67,10 @@ body {
 .list {
   padding: 10px;
   border-radius: 4px;
-  background-color: var(--bg-list);
   border: 1px solid var(--border-light);
   color: var(--text-main);
 }
 
-#selected {
-  background-color: var(--bg-list-selected);
-}
-  
 #add-list {
   margin-top: auto;
   padding: 8px;
@@ -71,11 +81,11 @@ body {
   align-self: center;
   font-weight: bold;
 }
-  
+
 #add-list:hover {
   background-color: var(--accent-hover);
 }
-  
+
 main {
   flex: 1;
   padding: 20px;
@@ -83,7 +93,7 @@ main {
   flex-direction: column;
   gap: 20px;
 }
-  
+
 #todo-container {
   display: flex;
   flex-direction: column;
@@ -101,7 +111,7 @@ main {
   padding: 10px;
   border-radius: 4px;
 }
-  
+
 #not-done {
   border-left: 5px solid var(--accent);
 }
@@ -114,7 +124,7 @@ main {
   text-decoration: line-through;
   color: var(--done-text);
 }
-  
+
 #add-todo {
   width: 100px;
   padding: 8px;
@@ -125,9 +135,9 @@ main {
   margin-top: auto;
   align-self: center;
 }
-  
+
 #add-todo:hover {
-    background-color: var(--accent-hover);;
+  background-color: var(--accent-hover);
 }
 
 #remove {
@@ -143,4 +153,29 @@ main {
 #remove:hover {
   background-color: var(--accent);
   color: white;
+}
+
+form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+form input {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-light);
+}
+
+form button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+form button:hover {
+  background: var(--accent-hover);
 }
