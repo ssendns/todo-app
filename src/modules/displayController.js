@@ -53,6 +53,10 @@ const displayController = (function () {
       }
 
       card.innerHTML = `<p>${list.title}</p>`;
+      card.style.backgroundColor =
+        list.id === manager.currentList
+          ? "var(--bg-list-selected)"
+          : `var(--accent-${list.color})`;
 
       card.addEventListener("click", () => {
         manager.currentList = list.id;
