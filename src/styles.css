@@ -69,6 +69,8 @@ body {
   border-radius: 4px;
   border: 1px solid var(--border-light);
   color: var(--text-main);
+  display: flex;
+  align-items: center;
 }
 
 #add-list {
@@ -140,7 +142,7 @@ main {
   background-color: var(--accent-hover);
 }
 
-#remove {
+.remove {
   background-color: transparent;
   border: none;
   color: var(--text-muted);
@@ -150,7 +152,7 @@ main {
   border-radius: 4px;
 }
 
-#remove:hover {
+.remove:hover {
   background-color: var(--accent);
   color: white;
 }

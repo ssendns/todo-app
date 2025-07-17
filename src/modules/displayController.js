@@ -52,7 +52,10 @@ const displayController = (function () {
         card.id = "not-selected";
       }
 
-      card.innerHTML = `<p>${list.title}</p>`;
+      card.innerHTML = `
+                <p>${list.title}</p>
+                <button class="remove" id="remove-list">remove</button>
+        `;
       card.style.backgroundColor =
         list.id === manager.currentList
           ? "var(--bg-list-selected)"
@@ -62,6 +65,16 @@ const displayController = (function () {
         manager.currentList = list.id;
         renderTodos();
         renderLists();
+      });
+      const editBtn = card.querySelector("#remove-list");
+      editBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        manager.removeList(list.id);
+        if (manager.currentList === list.id) {
+          manager.currentList = manager.lists[0]?.id || null;
+        }
+        renderLists();
+        renderTodos();
       });
 
       listContainer.appendChild(card);
@@ -87,7 +100,7 @@ const displayController = (function () {
       card.innerHTML = `
                 <input type="checkbox" ${todo.status ? "checked" : ""} />
                 <label>${todo.title}</label>
-                <button id="remove">remove todo</button>
+                <button class="remove" id="remove-todo">remove todo</button>
             `;
 
       const checkbox = card.querySelector("input[type='checkbox']");
@@ -96,7 +109,7 @@ const displayController = (function () {
         renderTodos();
       });
 
-      const removeBtn = card.querySelector("#remove");
+      const removeBtn = card.querySelector("#remove-todo");
       removeBtn.addEventListener("click", () => {
         manager.removeTodo(manager.currentList, todo.id);
         renderTodos();
