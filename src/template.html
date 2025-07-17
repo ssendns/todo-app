@@ -1,19 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>to do manager</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="sibebar">
-        <h2>my lists</h2>
-        <div id="list-container"></div>
-        <button id="add-list">add list</button>
+      <h2>my lists</h2>
+      <div id="list-container"></div>
+      <button id="add-list">add list</button>
+      <form id="list-form" class="hidden">
+        <input type="text" id="list-name" placeholder="list name" required />
+        <input type="text" id="color" placeholder="color" required />
+        <button type="submit">create list</button>
+      </form>
     </div>
     <main>
-        <h2 id="cur"></h2>
-        <div id="todo-container"></div>
-        <button id="add-todo">add todo</button>
+      <h2 id="cur"></h2>
+      <div id="todo-container"></div>
+      <button id="add-todo">add todo</button>
+
+      <form id="todo-form" class="hidden">
+        <input type="text" id="todo-title" placeholder="todo title" required />
+        <input type="text" id="todo-desc" placeholder="optional description" />
+        <button type="submit">add todo</button>
+      </form>
     </main>
   </body>
 </html>
