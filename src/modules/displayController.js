@@ -16,7 +16,7 @@ const displayController = (function () {
   listForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = document.querySelector("#list-name").value.trim();
-    const color = document.querySelector("#color").value.trim();
+    const color = document.querySelector('input[name="color"]:checked').value;
     manager.addList(name, color);
     e.target.reset();
     e.target.classList.add("hidden");
@@ -56,7 +56,7 @@ const displayController = (function () {
       card.style.backgroundColor =
         list.id === manager.currentList
           ? "var(--bg-list-selected)"
-          : `var(--accent-${list.color})`;
+          : list.color;
 
       card.addEventListener("click", () => {
         manager.currentList = list.id;

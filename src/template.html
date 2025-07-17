@@ -11,7 +11,33 @@
       <button id="add-list">add list</button>
       <form id="list-form" class="hidden">
         <input type="text" id="list-name" placeholder="list name" required />
-        <input type="text" id="color" placeholder="color" required />
+        <div class="color-picker">
+          <div class="color-options">
+            <input
+              type="radio"
+              name="color"
+              value="#f8485e"
+              id="color1"
+              required
+            />
+            <label for="color1" style="background-color: #f8485e"></label>
+
+            <input type="radio" name="color" value="#ff914d" id="color2" />
+            <label for="color2" style="background-color: #ff914d"></label>
+
+            <input type="radio" name="color" value="#ffda3e" id="color3" />
+            <label for="color3" style="background-color: #ffda3e"></label>
+
+            <input type="radio" name="color" value="#96e6b3" id="color4" />
+            <label for="color4" style="background-color: #96e6b3"></label>
+
+            <input type="radio" name="color" value="#4fd3c4" id="color5" />
+            <label for="color5" style="background-color: #4fd3c4"></label>
+
+            <input type="radio" name="color" value="#4f7cff" id="color6" />
+            <label for="color6" style="background-color: #4f7cff"></label>
+          </div>
+        </div>
         <button type="submit">create list</button>
       </form>
     </div>

@@ -159,7 +159,9 @@ form {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 form input {
@@ -178,4 +180,34 @@ form button {
 
 form button:hover {
   background: var(--accent-hover);
+}
+
+.color-picker {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.color-picker input[type="radio"] {
+  display: none;
+}
+
+color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.color-options label {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 2px solid transparent;
+}
+
+.color-options input[type="radio"]:checked + label {
+  border: 2px solid #000;
 }
