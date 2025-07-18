@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Hello-Notie';
+    src: url('HelloNotieRegular.woff2') format('woff2'),
+        url('HelloNotieRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

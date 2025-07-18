@@ -31,11 +31,21 @@
   --border-light: #e0e0e0;
 }
 
+@font-face {
+  font-family: "Hello-Notie";
+  src:
+    url("../assets/fonts/HelloNotieRegular.woff2") format("woff2"),
+    url("../assets/fonts/HelloNotieRegular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: system-ui, sans-serif;
+  font-family: "Hello-Notie", sans-serif;
 }
 
 .hidden {
