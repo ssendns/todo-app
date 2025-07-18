@@ -48,8 +48,7 @@ const displayController = (function () {
       const wasCurrent = manager.currentList === listToEdit.id;
       manager.removeList(listToEdit.id);
       if (wasCurrent) {
-        const remaining = manager.lists;
-        manager.currentList = remaining.length > 0 ? remaining[0].id : null;
+        manager.currentList = manager.inboxId;
       }
       listToEdit = null;
       editListModal.classList.add("hidden");
@@ -72,7 +71,7 @@ const displayController = (function () {
     const color = document.querySelector(
       'input[name="edit-color"]:checked'
     ).value;
-    if (listToEdit) {
+    if (listToEdit && listToEdit.Id) {
       manager.editList(listToEdit.id, name, `var(--accent-${color})`);
       renderLists();
       editListModal.classList.add("hidden");
@@ -133,9 +132,13 @@ const displayController = (function () {
       }
 
       card.innerHTML = `
-                <p>${list.title}</p>
-                <button class="edit" id="edit-list">edit</button>
-        `;
+        <p>${list.title}</p>
+        ${
+          list.id !== manager.inboxId
+            ? '<button class="edit" id="edit-list">edit</button>'
+            : ""
+        }
+      `;
       card.style.backgroundColor =
         list.id === manager.currentList
           ? "var(--bg-list-selected)"
@@ -146,20 +149,22 @@ const displayController = (function () {
         renderTodos();
         renderLists();
       });
-      const editBtn = card.querySelector("#edit-list");
-      editBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        listToEdit = list;
-        document.querySelector("#edit-list-name").value = list.title;
-        const colorName = list.color
-          .replace("var(--accent-", "")
-          .replace(")", "");
-        const colorInput = document.querySelector(
-          `input[name="edit-color"][value="${colorName}"]`
-        );
-        if (colorInput) colorInput.checked = true;
-        editListModal.classList.remove("hidden");
-      });
+      if (list.id !== manager.inboxId) {
+        const editBtn = card.querySelector("#edit-list");
+        editBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          listToEdit = list;
+          document.querySelector("#edit-list-name").value = list.title;
+          const colorName = list.color
+            .replace("var(--accent-", "")
+            .replace(")", "");
+          const colorInput = document.querySelector(
+            `input[name="edit-color"][value="${colorName}"]`
+          );
+          if (colorInput) colorInput.checked = true;
+          editListModal.classList.remove("hidden");
+        });
+      }
 
       listContainer.appendChild(card);
     }

@@ -5,6 +5,7 @@ export default class Manager {
   constructor() {
     this.lists = [];
     this.currentList = null;
+    this.inboxId = null;
     this.load();
     if (this.lists.length === 0) {
       this.init();
@@ -12,14 +13,20 @@ export default class Manager {
   }
 
   save() {
-    localStorage.setItem("todo-app", JSON.stringify(this.lists));
+    const data = {
+      lists: this.lists,
+      inboxId: this.inboxId,
+    };
+    localStorage.setItem("todo-app", JSON.stringify(data));
   }
 
   load() {
     const data = localStorage.getItem("todo-app");
     if (!data) return;
 
-    const rawLists = JSON.parse(data);
+    const parsed = JSON.parse(data);
+    const rawLists = parsed.lists || [];
+
     this.lists = rawLists.map((listData) => {
       const list = new List(listData.title);
       list.id = listData.id;
@@ -33,13 +40,16 @@ export default class Manager {
       return list;
     });
 
-    this.currentList = this.lists[0]?.id || null;
+    this.inboxId =
+      parsed.inboxId || (this.lists.length > 0 ? this.lists[0].id : null);
+    this.currentList = this.lists.length > 0 ? this.lists[0].id : null;
   }
 
   init() {
     this.addList("inbox", "yellow");
     const list = this.lists[0];
     this.currentList = list.id;
+    this.inboxId = list.id;
   }
 
   addList(title, color) {
