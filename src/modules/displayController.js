@@ -139,10 +139,7 @@ const displayController = (function () {
             : ""
         }
       `;
-      card.style.backgroundColor =
-        list.id === manager.currentList
-          ? "var(--bg-list-selected)"
-          : list.color;
+      card.style.backgroundColor = list.color;
 
       card.addEventListener("click", () => {
         manager.currentList = list.id;
@@ -180,20 +177,18 @@ const displayController = (function () {
 
       const card = document.createElement("div");
       card.classList.add("todo");
-      if (todo.status) {
-        card.id = "done";
-      } else {
-        card.id = "not-done";
-      }
+      card.classList.add(todo.status ? "done" : "not-done");
 
       card.innerHTML = `
-                <input type="checkbox" ${todo.status ? "checked" : ""} />
-                <label>${todo.title}</label>
+                <div class="todo-content">
+                  <input type="checkbox" ${todo.status ? "checked" : ""} />
+                  <label>${todo.title}</label>
+                </div>
                 <button class="edit" id="edit-todo">edit todo</button>
             `;
 
       const checkbox = card.querySelector("input[type='checkbox']");
-      checkbox.addEventListener("change", () => {
+      checkbox.addEventListener("change", (e) => {
         manager.changeTodoStatus(manager.currentList, todo.id);
         renderTodos();
       });

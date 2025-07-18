@@ -6,9 +6,13 @@
   </head>
   <body>
     <div id="sibebar">
-      <h2>my lists</h2>
-      <div id="list-container"></div>
-      <button id="add-list">add list</button>
+      <div class="sidebar-top">
+        <h2>my lists</h2>
+        <div id="list-container"></div>
+      </div>
+      <div class="sidebar-bottom">
+        <button class="add" id="add-list">add list</button>
+      </div>
 
       <div id="modal-overlay-create-list" class="modal hidden">
         <div class="modal-content">
@@ -58,9 +62,13 @@
       </div>
     </div>
     <main>
-      <h2 id="cur"></h2>
-      <div id="todo-container"></div>
-      <button id="add-todo">add todo</button>
+      <div class="main-top">
+        <h2 id="cur"></h2>
+        <div id="todo-container"></div>
+      </div>
+      <div class="main-bottom">
+        <button class="add" id="add-todo">add todo</button>
+      </div>
 
       <div id="modal-overlay-create-todo" class="modal hidden">
         <div class="modal-content">
