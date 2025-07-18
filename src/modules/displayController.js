@@ -3,8 +3,14 @@ import Manager from "./manager.js";
 const displayController = (function () {
   const manager = new Manager();
 
+  const todayDateEl = document.getElementById("today-date");
+
+  const today = new Date().toISOString().split("T")[0];
+  todayDateEl.textContent = `today: ${today}`;
+
   const listContainer = document.querySelector("#list-container");
   const todoContainer = document.querySelector("#todo-container");
+  const todayTodos = document.querySelector("#today-todos");
 
   const currentListHeader = document.querySelector("#cur");
 
@@ -54,6 +60,7 @@ const displayController = (function () {
       editListModal.classList.add("hidden");
       displayController.renderLists();
       displayController.renderTodos();
+      displayController.renderTodayTodos();
     }
   });
   listForm.addEventListener("submit", (e) => {
@@ -94,6 +101,7 @@ const displayController = (function () {
       todoToEdit = null;
       editTodoModal.classList.add("hidden");
       displayController.renderTodos();
+      displayController.renderTodayTodos();
     }
   });
   editTodoForm.addEventListener("submit", (e) => {
@@ -103,6 +111,7 @@ const displayController = (function () {
     if (todoToEdit) {
       manager.editTodo(manager.currentList, todoToEdit.id, name, dueDate);
       renderTodos();
+      displayController.renderTodayTodos();
       editTodoModal.classList.add("hidden");
       todoToEdit = null;
     }
@@ -115,6 +124,7 @@ const displayController = (function () {
     e.target.reset();
     createTodoModal.classList.add("hidden");
     displayController.renderTodos();
+    displayController.renderTodayTodos();
   });
 
   function renderLists() {
@@ -144,6 +154,7 @@ const displayController = (function () {
       card.addEventListener("click", () => {
         manager.currentList = list.id;
         renderTodos();
+        displayController.renderTodayTodos();
         renderLists();
       });
       if (list.id !== manager.inboxId) {
@@ -194,6 +205,7 @@ const displayController = (function () {
       checkbox.addEventListener("change", (e) => {
         manager.changeTodoStatus(manager.currentList, todo.id);
         renderTodos();
+        displayController.renderTodayTodos();
       });
 
       const editBtn = card.querySelector("#edit-todo");
@@ -209,7 +221,33 @@ const displayController = (function () {
     }
   }
 
-  return { renderLists, renderTodos };
+  function renderTodayTodos() {
+    todayTodos.innerHTML = "";
+
+    const allLists = manager.getLists();
+    const today = new Date().toISOString().split("T")[0];
+
+    allLists.forEach((list) => {
+      list.todos.forEach((todo) => {
+        if (todo.dueDate === today) {
+          const div = document.createElement("div");
+          div.classList.add("todo");
+
+          div.innerHTML = `
+            <div class="todo-content">
+              <input type="checkbox" ${todo.status ? "checked" : ""} />
+              <label>${todo.title}</label>
+            </div>
+            <button class="edit" id="edit-todo">edit todo</button>
+          `;
+
+          todayTodos.appendChild(div);
+        }
+      });
+    });
+  }
+
+  return { renderLists, renderTodos, renderTodayTodos };
 })();
 
 export default displayController;
