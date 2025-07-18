@@ -8,8 +8,8 @@ export default class List {
     this.todos = [];
   }
 
-  addTodo(title, description) {
-    const todo = new Todo(title, description);
+  addTodo(title, date) {
+    const todo = new Todo(title, date);
     this.todos.push(todo);
     return todo;
   }

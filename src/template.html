@@ -80,11 +80,7 @@
               placeholder="todo title"
               required
             />
-            <input
-              type="text"
-              id="todo-desc"
-              placeholder="optional description"
-            />
+            <input type="date" id="todo-date" required />
             <button type="submit">add todo</button>
           </form>
         </div>
@@ -95,7 +91,7 @@
           <button class="close" id="close-edit-todo-modal">x</button>
           <form id="edit-todo-form">
             <input type="text" id="edit-todo-title" required />
-            <input type="text" id="edit-todo-desc" />
+            <input type="date" id="edit-todo-date" required />
             <button type="submit">save</button>
           </form>
           <button class="remove" id="remove-todo">remove</button>

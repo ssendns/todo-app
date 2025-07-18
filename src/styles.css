@@ -237,6 +237,13 @@ button:hover {
   flex: 1;
 }
 
+.todo-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .not-done {
   border-left: 20px solid var(--accent);
 }

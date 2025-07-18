@@ -99,9 +99,9 @@ const displayController = (function () {
   editTodoForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = document.querySelector("#edit-todo-title").value.trim();
-    const desc = document.querySelector("#edit-todo-desc").value.trim();
+    const date = document.querySelector("#edit-todo-date").value.trim();
     if (todoToEdit) {
-      manager.editTodo(manager.currentList, todoToEdit.id, name, desc);
+      manager.editTodo(manager.currentList, todoToEdit.id, name, date);
       renderTodos();
       editTodoModal.classList.add("hidden");
       todoToEdit = null;
@@ -110,8 +110,8 @@ const displayController = (function () {
   todoForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const title = document.querySelector("#todo-title").value.trim();
-    const description = document.querySelector("#todo-desc").value.trim();
-    manager.addTodo(manager.currentList, title, description);
+    const date = document.querySelector("#todo-date").value;
+    manager.addTodo(manager.currentList, title, date);
     e.target.reset();
     createTodoModal.classList.add("hidden");
     displayController.renderTodos();
@@ -184,8 +184,11 @@ const displayController = (function () {
                   <input type="checkbox" ${todo.status ? "checked" : ""} />
                   <label>${todo.title}</label>
                 </div>
-                <button class="edit" id="edit-todo">edit todo</button>
-            `;
+                <div class="todo-meta">
+                  <span class="todo-date">${todo.dueDate}</span>
+                  <button class="edit" id="edit-todo">edit todo</button>
+                </div>
+        `;
 
       const checkbox = card.querySelector("input[type='checkbox']");
       checkbox.addEventListener("change", (e) => {
@@ -198,7 +201,7 @@ const displayController = (function () {
         e.stopPropagation();
         todoToEdit = todo;
         document.querySelector("#edit-todo-title").value = todo.title;
-        document.querySelector("#edit-todo-desc").value = todo.description;
+        document.querySelector("#edit-todo-date").value = todo.date;
         editTodoModal.classList.remove("hidden");
       });
 
