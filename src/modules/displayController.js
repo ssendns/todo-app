@@ -3,7 +3,10 @@ import Manager from "./manager.js";
 const displayController = (function () {
   const manager = new Manager();
 
-  const todayDateEl = document.getElementById("today-date");
+  const prevBtn = document.querySelector("#prev-date");
+  const nextBtn = document.querySelector("#next-date");
+  prevBtn.addEventListener("click", () => shiftDate(-1));
+  nextBtn.addEventListener("click", () => shiftDate(1));
 
   const listContainer = document.querySelector("#list-container");
   const todoContainer = document.querySelector("#todo-container");
@@ -224,27 +227,7 @@ const displayController = (function () {
 
     const allLists = manager.getLists();
     const selectedDate = manager.currentDate;
-    const selected = new Date(selectedDate);
-    const today = new Date();
-    const yesterday = new Date();
-    const tomorrow = new Date();
-    yesterday.setDate(today.getDate() - 1);
-    tomorrow.setDate(today.getDate() + 1);
-    const isSameDay = (d1, d2) => d1.toDateString() === d2.toDateString();
-
-    if (isSameDay(selected, today)) {
-      header.textContent = "today";
-    } else if (isSameDay(selected, yesterday)) {
-      header.textContent = "yesterday";
-    } else if (isSameDay(selected, tomorrow)) {
-      header.textContent = "tomorrow";
-    } else {
-      header.textContent = selected.toLocaleDateString("en-GB", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      });
-    }
+    header.textContent = formatDate(selectedDate);
 
     allLists.forEach((list) => {
       list.todos.forEach((todo) => {
@@ -281,6 +264,40 @@ const displayController = (function () {
         }
       });
     });
+  }
+
+  function formatDate(selectedDate) {
+    const selected = new Date(selectedDate);
+    const today = new Date();
+    const yesterday = new Date();
+    const tomorrow = new Date();
+    yesterday.setDate(today.getDate() - 1);
+    tomorrow.setDate(today.getDate() + 1);
+    const isSameDay = (d1, d2) => d1.toDateString() === d2.toDateString();
+
+    if (isSameDay(selected, today)) {
+      return "today";
+    }
+    if (isSameDay(selected, yesterday)) {
+      return "yesterday";
+    }
+    if (isSameDay(selected, tomorrow)) {
+      return "tomorrow";
+    }
+    const res = selected.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+    return res;
+  }
+
+  function shiftDate(days) {
+    const current = new Date(manager.currentDate);
+    current.setDate(current.getDate() + days);
+    manager.currentDate = current.toISOString().split("T")[0];
+    manager.save();
+    renderTodayTodos();
   }
 
   return { renderLists, renderTodos, renderTodayTodos };
