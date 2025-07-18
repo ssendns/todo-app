@@ -5,9 +5,6 @@ const displayController = (function () {
 
   const todayDateEl = document.getElementById("today-date");
 
-  const today = new Date().toISOString().split("T")[0];
-  todayDateEl.textContent = `today: ${today}`;
-
   const listContainer = document.querySelector("#list-container");
   const todoContainer = document.querySelector("#todo-container");
   const todayTodos = document.querySelector("#today-todos");
@@ -223,13 +220,35 @@ const displayController = (function () {
 
   function renderTodayTodos() {
     todayTodos.innerHTML = "";
+    const header = document.querySelector("#today-date");
 
     const allLists = manager.getLists();
-    const today = new Date().toISOString().split("T")[0];
+    const selectedDate = manager.currentDate;
+    const selected = new Date(selectedDate);
+    const today = new Date();
+    const yesterday = new Date();
+    const tomorrow = new Date();
+    yesterday.setDate(today.getDate() - 1);
+    tomorrow.setDate(today.getDate() + 1);
+    const isSameDay = (d1, d2) => d1.toDateString() === d2.toDateString();
+
+    if (isSameDay(selected, today)) {
+      header.textContent = "today";
+    } else if (isSameDay(selected, yesterday)) {
+      header.textContent = "yesterday";
+    } else if (isSameDay(selected, tomorrow)) {
+      header.textContent = "tomorrow";
+    } else {
+      header.textContent = selected.toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      });
+    }
 
     allLists.forEach((list) => {
       list.todos.forEach((todo) => {
-        if (todo.dueDate === today) {
+        if (todo.dueDate === selectedDate) {
           const card = document.createElement("div");
           card.classList.add("todo");
           card.classList.add(todo.status ? "done" : "not-done");

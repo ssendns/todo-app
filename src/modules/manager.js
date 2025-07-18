@@ -5,6 +5,7 @@ export default class Manager {
   constructor() {
     this.lists = [];
     this.currentList = null;
+    this.currentDate = null;
     this.inboxId = null;
     this.load();
     if (this.lists.length === 0) {
@@ -16,6 +17,7 @@ export default class Manager {
     const data = {
       lists: this.lists,
       inboxId: this.inboxId,
+      currentDate: this.currentDate,
     };
     localStorage.setItem("todo-app", JSON.stringify(data));
   }
@@ -43,12 +45,15 @@ export default class Manager {
     this.inboxId =
       parsed.inboxId || (this.lists.length > 0 ? this.lists[0].id : null);
     this.currentList = this.lists.length > 0 ? this.lists[0].id : null;
+    this.currentDate =
+      parsed.currentDate || new Date().toISOString().split("T")[0];
   }
 
   init() {
     this.addList("inbox", "var(--accent-yellow)");
     const list = this.lists[0];
     this.currentList = list.id;
+    this.currentDate = new Date().toISOString().split("T")[0];
     this.inboxId = list.id;
   }
 

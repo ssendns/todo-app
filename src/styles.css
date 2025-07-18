@@ -132,6 +132,10 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
+.today h2 {
+  align-self: center;
+}
+
 /* buttons */
 
 button {
