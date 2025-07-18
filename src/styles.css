@@ -1,25 +1,23 @@
 :root {
-  --bg-main: #ffffff;
-  --bg-sidebar: #fcf8e8;
+  --bg-main: #ffe2e2;
+  --bg-today: #fff6dd;
+  --bg-sidebar: rgba(252, 248, 232, 0.5);
 
   --bg-card1: #ffe5ec;
   --bg-card2: #e5f6fd;
 
-  --bg-todo: #fff2d7;
+  --bg-todo: white;
   --bg-todo-done: #e1e1e1;
   --done-text: #b2b2b2;
 
-  --bg-list: #fce2ae;
-  --bg-list-selected: #fdd78c;
+  --accent-pink: #ffafaf;
+  --accent-orange: #ffbd8a;
+  --accent-yellow: #ffe08a;
+  --accent-mint: #b9f0a4;
+  --accent-teal: #bff0fa;
+  --accent-blue: #a4b2f0;
 
-  --accent-pink: #f8485e;
-  --accent-orange: #ff914d;
-  --accent-yellow: #ffda3e;
-  --accent-mint: #96e6b3;
-  --accent-teal: #48c9b0;
-  --accent-blue: #74b9ff;
-
-  --accent: #ff8a70;
+  --accent: #ff8a8a;
   --accent-hover: #ff715b;
 
   --accent2: #b0ec6b;
@@ -45,7 +43,7 @@
   margin: 0;
   padding: 0;
   font-family: "Hello-Notie", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 body {
@@ -63,7 +61,6 @@ body {
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
-  border-right: 1px solid var(--border-light);
 }
 
 .sidebar-top {
@@ -98,6 +95,38 @@ main {
   padding-bottom: 1rem;
 }
 
+.today {
+  width: 400px;
+  background-color: var(--bg-today);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.circle {
+  width: 225px;
+  height: 225px;
+  border-radius: 50%;
+  background-color: var(--accent-pink);
+  margin: 0 auto;
+}
+
+.progress-bar {
+  width: 80%;
+  height: 35px;
+  background-color: #ccc;
+  border-radius: 8px;
+  margin: auto;
+  margin-top: 1.5rem;
+}
+
+.today-todos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 h2 {
   font-size: 3rem;
   margin-bottom: 0.5rem;
@@ -118,7 +147,7 @@ button:hover {
 }
 
 .close {
-  font-size: 0.8rem;
+  font-size: 1.5rem;
   background: none;
   color: black;
   text-transform: lowercase;
@@ -180,7 +209,7 @@ button:hover {
 }
 
 #selected {
-  border: 2px solid black;
+  border: 2px solid var(--border-light);
 }
 
 /* todos */
@@ -209,11 +238,11 @@ button:hover {
 }
 
 .not-done {
-  border-left: 5px solid var(--accent);
+  border-left: 20px solid var(--accent);
 }
 
 .done {
-  border-left: 5px solid var(--accent2);
+  border-left: 20px solid var(--accent2);
 }
 
 .done label {

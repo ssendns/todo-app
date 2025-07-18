@@ -16,7 +16,7 @@
 
       <div id="modal-overlay-create-list" class="modal hidden">
         <div class="modal-content">
-          <button class="close" id="close-create-list-modal">close</button>
+          <button class="close" id="close-create-list-modal">x</button>
           <form id="list-form">
             <input
               type="text"
@@ -39,7 +39,7 @@
 
       <div id="modal-overlay-edit-list" class="modal hidden">
         <div class="modal-content">
-          <button class="close" id="close-edit-list-modal">close</button>
+          <button class="close" id="close-edit-list-modal">x</button>
           <form id="edit-list-form">
             <input
               type="text"
@@ -72,7 +72,7 @@
 
       <div id="modal-overlay-create-todo" class="modal hidden">
         <div class="modal-content">
-          <button class="close" id="close-create-todo-modal">close</button>
+          <button class="close" id="close-create-todo-modal">x</button>
           <form id="todo-form">
             <input
               type="text"
@@ -92,7 +92,7 @@
 
       <div id="modal-overlay-edit-todo" class="modal hidden">
         <div class="modal-content">
-          <button class="close" id="close-edit-todo-modal">close</button>
+          <button class="close" id="close-edit-todo-modal">x</button>
           <form id="edit-todo-form">
             <input type="text" id="edit-todo-title" required />
             <input type="text" id="edit-todo-desc" />
@@ -102,5 +102,21 @@
         </div>
       </div>
     </main>
+    <div class="today">
+      <h2>today</h2>
+      <div class="progress">
+        <div class="circle"></div>
+        <div class="progress-bar"></div>
+      </div>
+      <div class="today-todos">
+        <div class="todo">
+          <div class="todo-content">
+            <input type="checkbox" />
+            <label>test</label>
+          </div>
+          <button class="edit" id="edit-todo">edit todo</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

@@ -46,7 +46,7 @@ export default class Manager {
   }
 
   init() {
-    this.addList("inbox", "yellow");
+    this.addList("inbox", "var(--accent-yellow)");
     const list = this.lists[0];
     this.currentList = list.id;
     this.inboxId = list.id;
