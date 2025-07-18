@@ -12,7 +12,7 @@
 
       <div id="modal-overlay-create-list" class="modal hidden">
         <div class="modal-content">
-          <button id="close-create-list-modal">close</button>
+          <button class="close" id="close-create-list-modal">close</button>
           <form id="list-form">
             <input
               type="text"
@@ -35,7 +35,7 @@
 
       <div id="modal-overlay-edit-list" class="modal hidden">
         <div class="modal-content">
-          <button id="close-edit-list-modal">close</button>
+          <button class="close" id="close-edit-list-modal">close</button>
           <form id="edit-list-form">
             <input
               type="text"
@@ -64,7 +64,7 @@
 
       <div id="modal-overlay-create-todo" class="modal hidden">
         <div class="modal-content">
-          <button id="close-create-todo-modal">close</button>
+          <button class="close" id="close-create-todo-modal">close</button>
           <form id="todo-form">
             <input
               type="text"
@@ -84,12 +84,13 @@
 
       <div id="modal-overlay-edit-todo" class="modal hidden">
         <div class="modal-content">
-          <button id="close-edit-todo-modal">close</button>
+          <button class="close" id="close-edit-todo-modal">close</button>
           <form id="edit-todo-form">
             <input type="text" id="edit-todo-title" required />
             <input type="text" id="edit-todo-desc" />
             <button type="submit">save</button>
           </form>
+          <button class="remove" id="remove-todo">remove</button>
         </div>
       </div>
     </main>

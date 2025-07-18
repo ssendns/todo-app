@@ -29,6 +29,7 @@ const displayController = (function () {
   const editTodoModal = document.querySelector("#modal-overlay-edit-todo");
   const editTodoForm = document.querySelector("#edit-todo-form");
   const closeEditTodoBtn = document.querySelector("#close-edit-todo-modal");
+  const removeTodoBtn = document.querySelector("#remove-todo");
 
   let listToEdit = null;
   let todoToEdit = null;
@@ -87,6 +88,25 @@ const displayController = (function () {
   });
   closeEditTodoBtn.addEventListener("click", () => {
     editTodoModal.classList.add("hidden");
+  });
+  removeTodoBtn.addEventListener("click", () => {
+    if (todoToEdit) {
+      manager.removeTodo(manager.currentList, todoToEdit.id);
+      todoToEdit = null;
+      editTodoModal.classList.add("hidden");
+      displayController.renderTodos();
+    }
+  });
+  editTodoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.querySelector("#edit-todo-title").value.trim();
+    const desc = document.querySelector("#edit-todo-desc").value.trim();
+    if (todoToEdit) {
+      manager.editTodo(manager.currentList, todoToEdit.id, name, desc);
+      renderTodos();
+      editTodoModal.classList.add("hidden");
+      todoToEdit = null;
+    }
   });
   todoForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -174,9 +194,12 @@ const displayController = (function () {
       });
 
       const editBtn = card.querySelector("#edit-todo");
-      editBtn.addEventListener("click", () => {
-        //
-        renderTodos();
+      editBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        todoToEdit = todo;
+        document.querySelector("#edit-todo-title").value = todo.title;
+        document.querySelector("#edit-todo-desc").value = todo.description;
+        editTodoModal.classList.remove("hidden");
       });
 
       todoContainer.appendChild(card);

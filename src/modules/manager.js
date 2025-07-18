@@ -95,4 +95,12 @@ export default class Manager {
     todo.changeStatus();
     this.save();
   }
+
+  editTodo(listId, todoId, newTitle, newDesc) {
+    const list = this.getList(listId);
+    const todo = list.getTodo(todoId);
+    todo.title = newTitle;
+    todo.description = newDesc;
+    this.save();
+  }
 }
