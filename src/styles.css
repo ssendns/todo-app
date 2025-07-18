@@ -117,13 +117,27 @@ main {
   margin: 0 auto;
 }
 
-.progress-bar {
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#progress-bar {
   width: 80%;
   height: 35px;
-  background-color: #ccc;
   border-radius: 8px;
-  margin: auto;
-  margin-top: 1.5rem;
+  align-self: center;
+}
+
+#progress-bar::-webkit-progress-bar {
+  background-color: var(--bg-main);
+  border-radius: 10px;
+}
+
+#progress-bar::-webkit-progress-value {
+  background-color: var(--accent-pink);
+  border-radius: 10px;
 }
 
 #today-todos {
@@ -161,7 +175,6 @@ button:hover {
   color: black;
   text-transform: lowercase;
   padding: 0;
-  margin-bottom: 1rem;
   align-self: flex-end;
 }
 
@@ -296,12 +309,7 @@ button:hover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-.hidden {
-  display: none;
-}
-
 form {
-  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -365,4 +373,8 @@ form button:hover {
 
 .color-options input:checked {
   border: 2px solid #000;
+}
+
+.hidden {
+  display: none;
 }

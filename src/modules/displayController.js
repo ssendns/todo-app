@@ -78,7 +78,7 @@ const displayController = (function () {
     const color = document.querySelector(
       'input[name="edit-color"]:checked'
     ).value;
-    if (listToEdit && listToEdit.Id) {
+    if (listToEdit) {
       manager.editList(listToEdit.id, name, `var(--accent-${color})`);
       renderLists();
       editListModal.classList.add("hidden");
@@ -224,6 +224,10 @@ const displayController = (function () {
   function renderTodayTodos() {
     todayTodos.innerHTML = "";
     const header = document.querySelector("#today-date");
+    const progress = document.querySelector("#progress-bar");
+
+    let total = 0;
+    let done = 0;
 
     const allLists = manager.getLists();
     const selectedDate = manager.currentDate;
@@ -232,6 +236,8 @@ const displayController = (function () {
     allLists.forEach((list) => {
       list.todos.forEach((todo) => {
         if (todo.dueDate === selectedDate) {
+          total++;
+          if (todo.status) done++;
           const card = document.createElement("div");
           card.classList.add("todo");
           card.classList.add(todo.status ? "done" : "not-done");
@@ -264,6 +270,10 @@ const displayController = (function () {
         }
       });
     });
+    if (progress) {
+      const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+      progress.value = percent;
+    }
   }
 
   function formatDate(selectedDate) {
