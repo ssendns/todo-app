@@ -225,6 +225,7 @@ const displayController = (function () {
     todayTodos.innerHTML = "";
     const header = document.querySelector("#today-date");
     const progress = document.querySelector("#progress-bar");
+    const circle = document.querySelector(".circle");
 
     let total = 0;
     let done = 0;
@@ -270,10 +271,17 @@ const displayController = (function () {
         }
       });
     });
-    if (progress) {
-      const percent = total === 0 ? 0 : Math.round((done / total) * 100);
-      progress.value = percent;
-    }
+    const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+    progress.value = percent;
+    let color = "var(--accent-blue)";
+    if (percent >= 80) color = "var(--accent-pink)";
+    else if (percent >= 60) color = "var(--accent-orange)";
+    else if (percent >= 40) color = "var(--accent-yellow)";
+    else if (percent >= 20) color = "var(--accent-mint)";
+    else if (percent > 0) color = "var(--accent-teal)";
+    else color = "var(--accent-blue)";
+
+    circle.style.backgroundColor = color;
   }
 
   function formatDate(selectedDate) {

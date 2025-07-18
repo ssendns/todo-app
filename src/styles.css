@@ -113,8 +113,8 @@ main {
   width: 225px;
   height: 225px;
   border-radius: 50%;
-  background-color: var(--accent-pink);
   margin: 0 auto;
+  background-color: var(--accent-blue);
 }
 
 .progress {
@@ -136,8 +136,8 @@ main {
 }
 
 #progress-bar::-webkit-progress-value {
-  background-color: var(--accent-pink);
   border-radius: 10px;
+  background-color: var(--accent);
 }
 
 #today-todos {
