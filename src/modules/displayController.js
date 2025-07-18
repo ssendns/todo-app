@@ -230,10 +230,11 @@ const displayController = (function () {
     allLists.forEach((list) => {
       list.todos.forEach((todo) => {
         if (todo.dueDate === today) {
-          const div = document.createElement("div");
-          div.classList.add("todo");
+          const card = document.createElement("div");
+          card.classList.add("todo");
+          card.classList.add(todo.status ? "done" : "not-done");
 
-          div.innerHTML = `
+          card.innerHTML = `
             <div class="todo-content">
               <input type="checkbox" ${todo.status ? "checked" : ""} />
               <label>${todo.title}</label>
@@ -241,7 +242,23 @@ const displayController = (function () {
             <button class="edit" id="edit-todo">edit todo</button>
           `;
 
-          todayTodos.appendChild(div);
+          const checkbox = card.querySelector("input[type='checkbox']");
+          checkbox.addEventListener("change", (e) => {
+            manager.changeTodoStatus(manager.currentList, todo.id);
+            renderTodos();
+            displayController.renderTodayTodos();
+          });
+
+          const editBtn = card.querySelector("#edit-todo");
+          editBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            todoToEdit = todo;
+            document.querySelector("#edit-todo-title").value = todo.title;
+            document.querySelector("#edit-todo-date").value = todo.dueDate;
+            editTodoModal.classList.remove("hidden");
+          });
+
+          todayTodos.appendChild(card);
         }
       });
     });
