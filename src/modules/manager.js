@@ -32,7 +32,7 @@ export default class Manager {
       list.id = listData.id;
       list.color = listData.color;
       list.todos = listData.todos.map((todo) => {
-        const t = new Todo(todo.title, todo.date);
+        const t = new Todo(todo.title, todo.dueDate);
         t.id = todo.id;
         t.status = todo.status;
         return t;
@@ -87,9 +87,9 @@ export default class Manager {
     return this.getList(id).getTodos();
   }
 
-  addTodo(id, title, date) {
+  addTodo(id, title, dueDate) {
     const list = this.getList(id);
-    list.addTodo(title, date);
+    list.addTodo(title, dueDate);
     this.save();
   }
 
@@ -110,7 +110,7 @@ export default class Manager {
     const list = this.getList(listId);
     const todo = list.getTodo(todoId);
     todo.title = newTitle;
-    todo.date = newDate;
+    todo.dueDate = newDate;
     this.save();
   }
 }

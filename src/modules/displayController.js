@@ -99,9 +99,9 @@ const displayController = (function () {
   editTodoForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = document.querySelector("#edit-todo-title").value.trim();
-    const date = document.querySelector("#edit-todo-date").value.trim();
+    const dueDate = document.querySelector("#edit-todo-date").value.trim();
     if (todoToEdit) {
-      manager.editTodo(manager.currentList, todoToEdit.id, name, date);
+      manager.editTodo(manager.currentList, todoToEdit.id, name, dueDate);
       renderTodos();
       editTodoModal.classList.add("hidden");
       todoToEdit = null;
@@ -110,8 +110,8 @@ const displayController = (function () {
   todoForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const title = document.querySelector("#todo-title").value.trim();
-    const date = document.querySelector("#todo-date").value;
-    manager.addTodo(manager.currentList, title, date);
+    const dueDate = document.querySelector("#todo-date").value;
+    manager.addTodo(manager.currentList, title, dueDate);
     e.target.reset();
     createTodoModal.classList.add("hidden");
     displayController.renderTodos();
@@ -201,7 +201,7 @@ const displayController = (function () {
         e.stopPropagation();
         todoToEdit = todo;
         document.querySelector("#edit-todo-title").value = todo.title;
-        document.querySelector("#edit-todo-date").value = todo.date;
+        document.querySelector("#edit-todo-date").value = todo.dueDate;
         editTodoModal.classList.remove("hidden");
       });
 
