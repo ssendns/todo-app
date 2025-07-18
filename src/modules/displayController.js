@@ -7,10 +7,17 @@ const displayController = (function () {
   const currentListHeader = document.querySelector("#cur");
   const listForm = document.querySelector("#list-form");
   const todoForm = document.querySelector("#todo-form");
+  const modal = document.querySelector("#modal-overlay");
+  modal.classList.add("hidden");
 
   const addListBtn = document.querySelector("#add-list");
   addListBtn.addEventListener("click", () => {
-    listForm.classList.toggle("hidden");
+    modal.classList.remove("hidden");
+  });
+
+  const closeBtn = document.querySelector("#close-modal");
+  closeBtn.addEventListener("click", () => {
+    modal.classList.add("hidden");
   });
 
   listForm.addEventListener("submit", (e) => {
@@ -19,7 +26,7 @@ const displayController = (function () {
     const color = document.querySelector('input[name="color"]:checked').value;
     manager.addList(name, color);
     e.target.reset();
-    e.target.classList.add("hidden");
+    modal.classList.add("hidden");
     displayController.renderLists();
   });
 
