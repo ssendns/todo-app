@@ -11,8 +11,8 @@
       <button id="add-list">add list</button>
 
       <div id="modal-overlay-create-list" class="modal hidden">
-        <button id="close-create-list-modal">close</button>
         <div class="modal-content">
+          <button id="close-create-list-modal">close</button>
           <form id="list-form">
             <input
               type="text"
@@ -32,6 +32,30 @@
           </form>
         </div>
       </div>
+
+      <div id="modal-overlay-edit-list" class="modal hidden">
+        <div class="modal-content">
+          <button id="close-edit-list-modal">close</button>
+          <form id="edit-list-form">
+            <input
+              type="text"
+              id="edit-list-name"
+              placeholder="new name"
+              required
+            />
+            <div class="color-options">
+              <input type="radio" name="edit-color" value="pink" />
+              <input type="radio" name="edit-color" value="orange" />
+              <input type="radio" name="edit-color" value="yellow" />
+              <input type="radio" name="edit-color" value="mint" />
+              <input type="radio" name="edit-color" value="teal" />
+              <input type="radio" name="edit-color" value="blue" />
+            </div>
+            <button type="submit">save</button>
+          </form>
+          <button class="remove" id="remove-list">remove</button>
+        </div>
+      </div>
     </div>
     <main>
       <h2 id="cur"></h2>
@@ -39,8 +63,8 @@
       <button id="add-todo">add todo</button>
 
       <div id="modal-overlay-create-todo" class="modal hidden">
-        <button id="close-create-todo-modal">close</button>
         <div class="modal-content">
+          <button id="close-create-todo-modal">close</button>
           <form id="todo-form">
             <input
               type="text"
@@ -54,6 +78,17 @@
               placeholder="optional description"
             />
             <button type="submit">add todo</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="modal-overlay-edit-todo" class="modal hidden">
+        <div class="modal-content">
+          <button id="close-edit-todo-modal">close</button>
+          <form id="edit-todo-form">
+            <input type="text" id="edit-todo-title" required />
+            <input type="text" id="edit-todo-desc" />
+            <button type="submit">save</button>
           </form>
         </div>
       </div>

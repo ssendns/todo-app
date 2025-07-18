@@ -2,46 +2,92 @@ import Manager from "./manager.js";
 
 const displayController = (function () {
   const manager = new Manager();
+
   const listContainer = document.querySelector("#list-container");
   const todoContainer = document.querySelector("#todo-container");
+
   const currentListHeader = document.querySelector("#cur");
+
   const listForm = document.querySelector("#list-form");
   const todoForm = document.querySelector("#todo-form");
-  const createListModal = document.querySelector("#modal-overlay-create-list");
-  createListModal.classList.add("hidden");
-  const createTodoModal = document.querySelector("#modal-overlay-create-todo");
-  createTodoModal.classList.add("hidden");
 
   const addListBtn = document.querySelector("#add-list");
+  const addTodoBtn = document.querySelector("#add-todo");
+
+  const createListModal = document.querySelector("#modal-overlay-create-list");
+  createListModal.classList.add("hidden");
+  const closeListBtn = document.querySelector("#close-create-list-modal");
+  const createTodoModal = document.querySelector("#modal-overlay-create-todo");
+  createTodoModal.classList.add("hidden");
+  const closeCreateTodoBtn = document.querySelector("#close-create-todo-modal");
+
+  const editListModal = document.querySelector("#modal-overlay-edit-list");
+  const editListForm = document.querySelector("#edit-list-form");
+  const closeEditListBtn = document.querySelector("#close-edit-list-modal");
+  const removeListBtn = document.querySelector("#remove-list");
+
+  const editTodoModal = document.querySelector("#modal-overlay-edit-todo");
+  const editTodoForm = document.querySelector("#edit-todo-form");
+  const closeEditTodoBtn = document.querySelector("#close-edit-todo-modal");
+
+  let listToEdit = null;
+  let todoToEdit = null;
+
   addListBtn.addEventListener("click", () => {
     createListModal.classList.remove("hidden");
   });
-
-  const closeListBtn = document.querySelector("#close-create-list-modal");
   closeListBtn.addEventListener("click", () => {
     createListModal.classList.add("hidden");
   });
-
+  closeEditListBtn.addEventListener("click", () => {
+    editListModal.classList.add("hidden");
+  });
+  removeListBtn.addEventListener("click", () => {
+    if (listToEdit) {
+      const wasCurrent = manager.currentList === listToEdit.id;
+      manager.removeList(listToEdit.id);
+      if (wasCurrent) {
+        const remaining = manager.lists;
+        manager.currentList = remaining.length > 0 ? remaining[0].id : null;
+      }
+      listToEdit = null;
+      editListModal.classList.add("hidden");
+      displayController.renderLists();
+      displayController.renderTodos();
+    }
+  });
   listForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = document.querySelector("#list-name").value.trim();
     const color = document.querySelector('input[name="color"]:checked').value;
-    manager.addList(name, color);
+    manager.addList(name, `var(--accent-${color})`);
     e.target.reset();
     createListModal.classList.add("hidden");
     displayController.renderLists();
   });
+  editListForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.querySelector("#edit-list-name").value.trim();
+    const color = document.querySelector(
+      'input[name="edit-color"]:checked'
+    ).value;
+    if (listToEdit) {
+      manager.editList(listToEdit.id, name, `var(--accent-${color})`);
+      renderLists();
+      editListModal.classList.add("hidden");
+      listToEdit = null;
+    }
+  });
 
-  const addTodoBtn = document.querySelector("#add-todo");
   addTodoBtn.addEventListener("click", () => {
     createTodoModal.classList.remove("hidden");
   });
-
-  const closeCreateTodoBtn = document.querySelector("#close-create-todo-modal");
   closeCreateTodoBtn.addEventListener("click", () => {
     createTodoModal.classList.add("hidden");
   });
-
+  closeEditTodoBtn.addEventListener("click", () => {
+    editTodoModal.classList.add("hidden");
+  });
   todoForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const title = document.querySelector("#todo-title").value.trim();
@@ -68,7 +114,7 @@ const displayController = (function () {
 
       card.innerHTML = `
                 <p>${list.title}</p>
-                <button class="remove" id="remove-list">remove</button>
+                <button class="edit" id="edit-list">edit</button>
         `;
       card.style.backgroundColor =
         list.id === manager.currentList
@@ -80,15 +126,19 @@ const displayController = (function () {
         renderTodos();
         renderLists();
       });
-      const editBtn = card.querySelector("#remove-list");
+      const editBtn = card.querySelector("#edit-list");
       editBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        manager.removeList(list.id);
-        if (manager.currentList === list.id) {
-          manager.currentList = manager.lists[0]?.id || null;
-        }
-        renderLists();
-        renderTodos();
+        listToEdit = list;
+        document.querySelector("#edit-list-name").value = list.title;
+        const colorName = list.color
+          .replace("var(--accent-", "")
+          .replace(")", "");
+        const colorInput = document.querySelector(
+          `input[name="edit-color"][value="${colorName}"]`
+        );
+        if (colorInput) colorInput.checked = true;
+        editListModal.classList.remove("hidden");
       });
 
       listContainer.appendChild(card);
@@ -114,7 +164,7 @@ const displayController = (function () {
       card.innerHTML = `
                 <input type="checkbox" ${todo.status ? "checked" : ""} />
                 <label>${todo.title}</label>
-                <button class="remove" id="remove-todo">remove todo</button>
+                <button class="edit" id="edit-todo">edit todo</button>
             `;
 
       const checkbox = card.querySelector("input[type='checkbox']");
@@ -123,9 +173,9 @@ const displayController = (function () {
         renderTodos();
       });
 
-      const removeBtn = card.querySelector("#remove-todo");
-      removeBtn.addEventListener("click", () => {
-        manager.removeTodo(manager.currentList, todo.id);
+      const editBtn = card.querySelector("#edit-todo");
+      editBtn.addEventListener("click", () => {
+        //
         renderTodos();
       });
 
