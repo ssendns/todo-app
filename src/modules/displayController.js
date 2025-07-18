@@ -7,17 +7,19 @@ const displayController = (function () {
   const currentListHeader = document.querySelector("#cur");
   const listForm = document.querySelector("#list-form");
   const todoForm = document.querySelector("#todo-form");
-  const modal = document.querySelector("#modal-overlay");
-  modal.classList.add("hidden");
+  const createListModal = document.querySelector("#modal-overlay-create-list");
+  createListModal.classList.add("hidden");
+  const createTodoModal = document.querySelector("#modal-overlay-create-todo");
+  createTodoModal.classList.add("hidden");
 
   const addListBtn = document.querySelector("#add-list");
   addListBtn.addEventListener("click", () => {
-    modal.classList.remove("hidden");
+    createListModal.classList.remove("hidden");
   });
 
-  const closeBtn = document.querySelector("#close-modal");
-  closeBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
+  const closeListBtn = document.querySelector("#close-create-list-modal");
+  closeListBtn.addEventListener("click", () => {
+    createListModal.classList.add("hidden");
   });
 
   listForm.addEventListener("submit", (e) => {
@@ -26,13 +28,18 @@ const displayController = (function () {
     const color = document.querySelector('input[name="color"]:checked').value;
     manager.addList(name, color);
     e.target.reset();
-    modal.classList.add("hidden");
+    createListModal.classList.add("hidden");
     displayController.renderLists();
   });
 
   const addTodoBtn = document.querySelector("#add-todo");
   addTodoBtn.addEventListener("click", () => {
-    todoForm.classList.toggle("hidden");
+    createTodoModal.classList.remove("hidden");
+  });
+
+  const closeCreateTodoBtn = document.querySelector("#close-create-todo-modal");
+  closeCreateTodoBtn.addEventListener("click", () => {
+    createTodoModal.classList.add("hidden");
   });
 
   todoForm.addEventListener("submit", (e) => {
@@ -41,7 +48,7 @@ const displayController = (function () {
     const description = document.querySelector("#todo-desc").value.trim();
     manager.addTodo(manager.currentList, title, description);
     e.target.reset();
-    e.target.classList.add("hidden");
+    createTodoModal.classList.add("hidden");
     displayController.renderTodos();
   });
 

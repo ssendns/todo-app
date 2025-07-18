@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,8 +9,9 @@
       <h2>my lists</h2>
       <div id="list-container"></div>
       <button id="add-list">add list</button>
-      <div id="modal-overlay" class="modal hidden">
-        <button id="close-modal">close</button>
+
+      <div id="modal-overlay-create-list" class="modal hidden">
+        <button id="close-create-list-modal">close</button>
         <div class="modal-content">
           <form id="list-form">
             <input
@@ -37,11 +38,25 @@
       <div id="todo-container"></div>
       <button id="add-todo">add todo</button>
 
-      <form id="todo-form" class="hidden">
-        <input type="text" id="todo-title" placeholder="todo title" required />
-        <input type="text" id="todo-desc" placeholder="optional description" />
-        <button type="submit">add todo</button>
-      </form>
+      <div id="modal-overlay-create-todo" class="modal hidden">
+        <button id="close-create-todo-modal">close</button>
+        <div class="modal-content">
+          <form id="todo-form">
+            <input
+              type="text"
+              id="todo-title"
+              placeholder="todo title"
+              required
+            />
+            <input
+              type="text"
+              id="todo-desc"
+              placeholder="optional description"
+            />
+            <button type="submit">add todo</button>
+          </form>
+        </div>
+      </div>
     </main>
   </body>
 </html>
