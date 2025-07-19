@@ -1,4 +1,10 @@
 import Manager from "./manager.js";
+import img0 from "../../assets/images/0.png";
+import img100 from "../../assets/images/100.png";
+import img80 from "../../assets/images/80.png";
+import img60 from "../../assets/images/60.png";
+import img40 from "../../assets/images/40.png";
+import img20 from "../../assets/images/20.png";
 
 const displayController = (function () {
   const manager = new Manager();
@@ -273,15 +279,17 @@ const displayController = (function () {
     });
     const percent = total === 0 ? 0 : Math.round((done / total) * 100);
     progress.value = percent;
-    let color = "var(--accent-blue)";
-    if (percent >= 80) color = "var(--accent-pink)";
-    else if (percent >= 60) color = "var(--accent-orange)";
-    else if (percent >= 40) color = "var(--accent-yellow)";
-    else if (percent >= 20) color = "var(--accent-mint)";
-    else if (percent > 0) color = "var(--accent-teal)";
-    else color = "var(--accent-blue)";
+    let image = img0;
+    if (percent >= 80) image = img100;
+    else if (percent >= 60) image = img80;
+    else if (percent >= 40) image = img60;
+    else if (percent >= 20) image = img40;
+    else if (percent > 0) image = img20;
+    else image = img0;
 
-    circle.style.backgroundColor = color;
+    circle.style.backgroundImage = `url(${image})`;
+    circle.style.backgroundSize = "cover";
+    circle.style.backgroundPosition = "center";
   }
 
   function formatDate(selectedDate) {
