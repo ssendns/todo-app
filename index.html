@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>to do manager</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <div id="sibebar">
+      <div class="sidebar-top">
+        <h2>my lists</h2>
+        <div id="list-container"></div>
+      </div>
+      <div class="sidebar-bottom">
+        <button class="add" id="add-list">add list</button>
+      </div>
+
+      <div id="modal-overlay-create-list" class="modal hidden">
+        <div class="modal-content">
+          <button class="close" id="close-create-list-modal">x</button>
+          <form id="list-form">
+            <input
+              type="text"
+              id="list-name"
+              placeholder="list name"
+              required
+            />
+            <div class="color-options">
+              <input type="radio" name="color" value="pink" checked />
+              <input type="radio" name="color" value="orange" />
+              <input type="radio" name="color" value="yellow" />
+              <input type="radio" name="color" value="mint" />
+              <input type="radio" name="color" value="teal" />
+              <input type="radio" name="color" value="blue" />
+            </div>
+            <button type="submit">create list</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="modal-overlay-edit-list" class="modal hidden">
+        <div class="modal-content">
+          <button class="close" id="close-edit-list-modal">x</button>
+          <form id="edit-list-form">
+            <input
+              type="text"
+              id="edit-list-name"
+              placeholder="new name"
+              required
+            />
+            <div class="color-options">
+              <input type="radio" name="edit-color" value="pink" />
+              <input type="radio" name="edit-color" value="orange" />
+              <input type="radio" name="edit-color" value="yellow" />
+              <input type="radio" name="edit-color" value="mint" />
+              <input type="radio" name="edit-color" value="teal" />
+              <input type="radio" name="edit-color" value="blue" />
+            </div>
+            <button type="submit">save</button>
+          </form>
+          <button class="remove" id="remove-list">remove</button>
+        </div>
+      </div>
+    </div>
+    <main>
+      <div class="main-top">
+        <h2 id="cur"></h2>
+        <div id="todo-container"></div>
+      </div>
+      <div class="main-bottom">
+        <button class="add" id="add-todo">add todo</button>
+      </div>
+
+      <div id="modal-overlay-create-todo" class="modal hidden">
+        <div class="modal-content">
+          <button class="close" id="close-create-todo-modal">x</button>
+          <form id="todo-form">
+            <input
+              type="text"
+              id="todo-title"
+              placeholder="todo title"
+              required
+            />
+            <input type="date" id="todo-date" required />
+            <button type="submit">add todo</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="modal-overlay-edit-todo" class="modal hidden">
+        <div class="modal-content">
+          <button class="close" id="close-edit-todo-modal">x</button>
+          <form id="edit-todo-form">
+            <input type="text" id="edit-todo-title" required />
+            <input type="date" id="edit-todo-date" required />
+            <button type="submit">save</button>
+          </form>
+          <button class="remove" id="remove-todo">remove</button>
+        </div>
+      </div>
+    </main>
+    <div class="today">
+      <div class="date-navigation">
+        <button class="arrow" id="prev-date">←</button>
+        <h2 id="today-date"></h2>
+        <button class="arrow" id="next-date">→</button>
+      </div>
+      <div class="progress">
+        <div class="circle"></div>
+        <progress id="progress-bar" value="0" max="100"></progress>
+      </div>
+      <div id="today-todos"></div>
+    </div>
+  </body>
+</html>
