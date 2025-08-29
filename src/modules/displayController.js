@@ -259,7 +259,7 @@ const displayController = (function () {
 
           const checkbox = card.querySelector("input[type='checkbox']");
           checkbox.addEventListener("change", (e) => {
-            manager.changeTodoStatus(manager.currentList, todo.id);
+            manager.changeTodoStatus(list.id, todo.id);
             renderTodos();
             displayController.renderTodayTodos();
           });
