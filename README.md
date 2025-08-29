@@ -2,6 +2,8 @@
 
 **todo-app** is a lightweight, single-page task management application built with modular vanilla JavaScript. it provides an intuitive, list-based interface and a daily view for tracking tasks and visualizing progress. all UI elements and custom assets were fully designed and implemented by me
 
+live preview - https://ssendns.github.io/todo-app/
+
 <img src="./assets/images/todo-preview.png" alt="todo screenshot" width="700"/>
 
 ---
